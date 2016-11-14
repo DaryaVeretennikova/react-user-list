@@ -1,34 +1,41 @@
 import React from 'react';
-import { ReactDOM, render } from 'react-dom';
+import { ReactDOM, render, findDOMNode } from 'react-dom';
 import { browserHistory, Router, Route, IndexRoute, Link, withRouter } from 'react-router';
+
+import UserStore from './UserStore';
 
 import './index.css';
 
 const App = React.createClass({
     getInitialState() {
         return {
-            users: [
-                { 
-                    "id" : 1,
-                    "name" : "Joe Smith",
-                    "login" : "joe",
-                    "email": "joe.smith@mail.com"
-                },
-                { 
-                    "id" : 2,
-                    "name" : "Mary Smith",
-                    "login" : "mary",
-                    "email": "mary.smith@mail.com"
-                },
-                { 
-                    "id" : 3,
-                    "name" : "Bill Gates",
-                    "login" : "bill",
-                    "email": "billy@mail.com"
-                }
-            ]
+            users: UserStore.getUsers()
         }
     },
+
+    componentWillMount() {
+        UserStore.init()
+    },
+
+    componentDidMount() {
+        UserStore.addChangeListener(this.updateUsers)
+    },
+
+    componentWillUnmount() {
+        UserStore.removeChangeListener(this.updateUsers)
+    },
+
+    updateUsers() {
+        this.setState({
+          users: UserStore.getUsers()
+        })
+    },
+
+    remove(id) {
+        UserStore.removeUser(id);
+        this.props.router.push('/')
+    },
+
     render() {
         const rows = this.state.users.map((user) => {
             return (
@@ -38,7 +45,7 @@ const App = React.createClass({
                     <td>{user.email}</td>
                     <td>
                         <button>Edit</button>
-                        <button>Remove</button>
+                        <button onClick={() => this.remove(user.id)}>Remove</button>
                     </td>
                 </tr>
             )
@@ -67,21 +74,34 @@ const App = React.createClass({
 })
 
 const CreateUser = withRouter(React.createClass({
+
+    createUser(event) {
+      event.preventDefault()
+
+      console.log("Save click");
+
+      UserStore.addUser({
+        name: findDOMNode(this.refs.name).value,
+        login: findDOMNode(this.refs.login).value,
+        email: findDOMNode(this.refs.email).value,
+      }, () => { this.props.router.push('/') } )
+    },
+
     render() {
       return (
         <div>
-          <form className="form">
+          <form className="form" onSubmit={this.createUser}>
             <div className="form__row">
-                <label for="name" className="form__label">Name</label>
-                <input name="name" placeholder="name"/>
+                <label htmlFor="name" className="form__label">Name</label>
+                <input name="name" ref="name" placeholder="name"/>
             </div>
             <div className="form__row">
-                <label for="login" className="form__label">Login</label>
-                <input name="login" placeholder="login"/>
+                <label htmlFor="login" className="form__label">Login</label>
+                <input name="login" ref="login" placeholder="login"/>
             </div>
             <div className="form__row">
-                <label for="email" className="form__label">Email</label>
-                <input name="email" placeholder="email"/>
+                <label htmlFor="email" className="form__label">Email</label>
+                <input name="email" ref="email" placeholder="email"/>
             </div>
             <div className="form__row">
                 <input type="submit" value="save" className="form__submit" />

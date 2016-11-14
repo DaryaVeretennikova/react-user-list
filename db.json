@@ -1,0 +1,22 @@
+{
+    "users": [
+    { 
+        "id" : 1,
+        "name" : "Joe Smith",
+        "login" : "joe",
+        "email": "joe.smith@mail.com"
+    },
+    { 
+        "id" : 2,
+        "name" : "Mary Smith",
+        "login" : "mary",
+        "email": "mary.smith@mail.com"
+    },
+    { 
+        "id" : 3,
+        "name" : "Bill Gates",
+        "login" : "bill",
+        "email": "billy@mail.com"
+    }
+  ]  
+}

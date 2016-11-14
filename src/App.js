@@ -1,21 +1,78 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { withRouter } from 'react-router'
 import './App.css';
 
-class App extends Component {
+class UserList extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <h1>User list</h1>
+        <button>add user</button>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Login</th>
+              <th>Email</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     );
   }
 }
 
-export default App;
+
+
+const CreateUser = withRouter(
+  React.createClass({
+    render() {
+      return (
+        <div>
+          <form>
+            <label for="name">Name</label>
+            <input name="name" placeholder="name"/>
+            <label for="login">Login</label>
+            <input name="login" placeholder="login"/>
+            <label for="email">Email</label>
+            <input name="email" placeholder="email"/>
+            <input type="submit" value="save" />
+          </form>
+        </div>
+      );
+    }
+  }));
+
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <p>Hello world!</p>
+        <UserList />
+      </div>
+    );    
+  }
+}
+
+export default { App, CreateUser };

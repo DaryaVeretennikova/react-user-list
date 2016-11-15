@@ -26,7 +26,9 @@ const UserStore = {
     },
 
     getUserId: function(id) {
-        return _users[id - 1];
+        let userIndex = this.findObjectById(id);
+
+        return _users[userIndex];
     },
 
     getUsers: function() {
@@ -34,30 +36,24 @@ const UserStore = {
     },
 
     addUser: function(user, callback) {
+        let userIndex = this.findObjectById(user['id']);
+
         if (user['id'] !== undefined) {
-            _users[user['id'] - 1] = user;
+            _users[userIndex] = user;
         } else {
             user['id'] = Math.max(..._users.map(user => user.id)) + 1;
             _users.push(user);
         }
 
         this.notifyChange();
+        if (callback) {
 
-        if (callback) { 
             callback();
         }
     },
 
     removeUser: function(id, callback) {
-        let userIndex;
-
-        _users.map((item, index) => { 
-            if (item.id === id) {
-                userIndex = index;
-                return false;
-            }
-            return true;
-        });
+        let userIndex = this.findObjectById(id);
 
         _users.splice(userIndex, 1);
         
@@ -66,6 +62,12 @@ const UserStore = {
         if (callback) { 
             callback();
         }
+    },
+
+    findObjectById(id) {
+        return _users.findIndex( item => {
+            return item.id.toString() === id;
+        });
     },
 
     notifyChange: function() {

@@ -36,9 +36,8 @@ const UserStore = {
     },
 
     addUser: function (user, callback) {
-        let userIndex = this.findObjectById(user['id']);
-
         if (user['id'] !== undefined) {
+            let userIndex = this.findObjectById(user['id']);
             _users[userIndex] = user;
         } else {
             user['id'] = Math.max(..._users.map(user => user.id)) + 1;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ReactDOM, render, findDOMNode } from 'react-dom';
-import { browserHistory, Router, Route, IndexRoute, Link, withRouter } from 'react-router';
+import { hashHistory, Router, Route, IndexRoute, Link, withRouter } from 'react-router';
 
 import UserStore from './UserStore';
 
@@ -113,7 +113,7 @@ const CreateUser = withRouter(React.createClass({
 }));
 
 render((
-  <Router history={browserHistory}>
+  <Router history={hashHistory}>
     <Route path="/" component={App} />
     <Route path="/user/new" component={CreateUser} />
   </Router>

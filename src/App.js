@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
+import React, {Component} from 'react';
+import {Link} from 'react-router';
 
 import UserStore from './UserStore';
 
@@ -41,10 +41,13 @@ class App extends Component {
                     <td>{user.login}</td>
                     <td>{user.email}</td>
                     <td>
-                        <Link to={{ pathname: '/user/new', query: { edit: user.id } }} className="btn btn_theme_action btn_theme_green">
+                        <Link to={{pathname: '/user/new', query: {edit: user.id}}}
+                              className="btn btn_theme_action btn_theme_green">
                             Edit
                         </Link>
-                        <button onClick={this.remove.bind(this, user.id)} className="btn btn_theme_action btn_theme_red">Remove</button>
+                        <button onClick={this.remove.bind(this, user.id)}
+                                className="btn btn_theme_action btn_theme_red">Remove
+                        </button>
                     </td>
                 </tr>
             )

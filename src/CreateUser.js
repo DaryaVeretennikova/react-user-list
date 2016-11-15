@@ -1,11 +1,11 @@
 import React from 'react';
-import { withRouter } from 'react-router';
-import { findDOMNode } from 'react-dom';
+import {withRouter} from 'react-router';
+import {findDOMNode} from 'react-dom';
 
 import UserStore from './UserStore';
 
 const CreateUser = withRouter(React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
 
 
         return {
@@ -33,7 +33,9 @@ const CreateUser = withRouter(React.createClass({
             name: findDOMNode(this.refs.name).value,
             login: findDOMNode(this.refs.login).value,
             email: findDOMNode(this.refs.email).value,
-        }, () => { this.props.router.push('/') } )
+        }, () => {
+            this.props.router.push('/')
+        })
     },
 
     fillFields() {
@@ -53,12 +55,12 @@ const CreateUser = withRouter(React.createClass({
 
     validateEmptyName() {
         this.setState({
-           error: 'error'
+            error: 'error'
         });
     },
 
-    isError: function() {
-        return 'form__row '+ ((this.state.error === '') ? '' : 'error');
+    isError: function () {
+        return 'form__row ' + ((this.state.error === '') ? '' : 'error');
     },
 
     render() {
@@ -67,19 +69,22 @@ const CreateUser = withRouter(React.createClass({
                 <form className="form" onSubmit={this.createUser}>
                     <div className={this.isError()}>
                         <label htmlFor="name" className="form__label">Name</label>
-                        <input name="name" ref="name" placeholder="name" className="form__input" defaultValue={this.state.userName} />
+                        <input name="name" ref="name" placeholder="name" className="form__input"
+                               defaultValue={this.state.userName}/>
                         <div className="form__error">Please fill this field</div>
                     </div>
                     <div className="form__row">
                         <label htmlFor="login" className="form__label">Login</label>
-                        <input name="login" ref="login" placeholder="login" className="form__input" defaultValue={this.state.userLogin} />
+                        <input name="login" ref="login" placeholder="login" className="form__input"
+                               defaultValue={this.state.userLogin}/>
                     </div>
                     <div className="form__row">
                         <label htmlFor="email" className="form__label">Email</label>
-                        <input name="email" ref="email" placeholder="email" className="form__input" defaultValue={this.state.userEmail} />
+                        <input name="email" ref="email" placeholder="email" className="form__input"
+                               defaultValue={this.state.userEmail}/>
                     </div>
                     <div className="form__row">
-                        <input type="submit" value="save" className="form__submit" />
+                        <input type="submit" value="save" className="form__submit"/>
                     </div>
                 </form>
             </div>

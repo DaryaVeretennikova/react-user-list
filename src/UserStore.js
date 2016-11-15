@@ -66,7 +66,7 @@ const UserStore = {
 
     findObjectById(id) {
         return _users.findIndex(item => {
-            return item.id.toString() === id;
+            return item.id.toString() === id.toString();
         });
     },
 

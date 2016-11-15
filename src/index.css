@@ -112,3 +112,20 @@ body {
     line-height: 40px;
     padding: 0 10px;
 }
+
+/* error */
+
+.form__error {
+    margin-top: 10px;
+    display: none;
+    color: #8f2830;
+    font-size: 14px;
+}
+
+.form__row.error .form__input {
+    border-color: #8f2830;
+}
+
+.form__row.error .form__error {
+    display: block;
+}

@@ -92,4 +92,23 @@ body {
     text-decoration: none;
     text-transform: uppercase;
     font-family: sans-serif;
+    cursor: pointer;
+}
+
+.btn_theme_action:first-of-type {
+    margin-right: 20px;
+}
+
+.btn_theme_green {
+    background-color: #46c83b;
+}
+
+.btn_theme_red {
+    background-color: #8f2830;
+}
+.form__input {
+    border: 1px solid #ccc;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
 }

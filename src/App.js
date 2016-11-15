@@ -41,8 +41,10 @@ class App extends Component {
                     <td>{user.login}</td>
                     <td>{user.email}</td>
                     <td>
-                        <button>Edit</button>
-                        <button onClick={this.remove.bind(this, user.id)}>Remove</button>
+                        <Link to={{ pathname: '/user/new', query: { edit: user.id } }} className="btn btn_theme_action btn_theme_green">
+                            Edit
+                        </Link>
+                        <button onClick={this.remove.bind(this, user.id)} className="btn btn_theme_action btn_theme_red">Remove</button>
                     </td>
                 </tr>
             )

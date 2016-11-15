@@ -30,9 +30,13 @@ const UserStore = {
     },
 
     addUser: function(user, callback) {
-        user['id'] = Math.max(..._users.map(user => user.id)) + 1
+        if (user['id'] !== undefined) {
+            _users[user['id'] - 1] = user;
+        } else {
+            user['id'] = Math.max(..._users.map(user => user.id)) + 1;
+            _users.push(user);
+        }
 
-        _users.push(user);
         this.notifyChange();
 
         if (callback) { 
@@ -62,7 +66,6 @@ const UserStore = {
 
     notifyChange: function() {
         _changeListeners.forEach(function (listener) {
-            console.log(listener)
             listener()
         })
     },
@@ -76,6 +79,6 @@ const UserStore = {
             return listener !== l
         })
     }
-}
+};
 
 export default UserStore;

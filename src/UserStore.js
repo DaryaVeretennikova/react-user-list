@@ -1,4 +1,3 @@
-
 let _changeListeners = [];
 let _users = [
     { 
@@ -47,7 +46,9 @@ const UserStore = {
         _users.map((item, index) => { 
             if (item.id === id) {
                 userIndex = index;
+                return false;
             }
+            return true;
         });
 
         _users.splice(userIndex, 1);
@@ -61,6 +62,7 @@ const UserStore = {
 
     notifyChange: function() {
         _changeListeners.forEach(function (listener) {
+            console.log(listener)
             listener()
         })
     },

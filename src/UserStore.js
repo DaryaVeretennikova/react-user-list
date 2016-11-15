@@ -25,6 +25,10 @@ const UserStore = {
         this.notifyChange();
     },
 
+    getUserId: function(id) {
+        return _users[id - 1];
+    },
+
     getUsers: function() {
         return _users;
     },
